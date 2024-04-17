@@ -52,3 +52,56 @@ model VerificationToken {
  
   @@unique([identifier, token])
 }
+
+// Définition de la table Type
+model Type {
+  image      String
+  name       String   @id
+  locations  Location[]
+
+    createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Définition de la table Engin
+model Engin {
+  image         String
+  registration String   @id
+  frais         Float
+  state         String
+  locations     Location[]
+
+    createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Définition de la table Location
+model Location {
+  id              String    @id @default(cuid())
+  firstname       String
+  lastname        String
+  phone           String
+  businessName    String
+  businessAdress  String
+  nbrEngin        Int
+  dateDebut       DateTime
+  dateFin         DateTime
+  typeID          String
+  enginId         String
+  payement        String
+  Type            Type      @relation(fields: [typeID], references: [name], onDelete: Cascade)
+  Engin           Engin     @relation(fields: [enginId], references: [registration] , onDelete: Cascade)
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Définition de la table Facture
+model Facture {
+  logo    String
+  factId  String     @id
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
