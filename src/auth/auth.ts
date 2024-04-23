@@ -13,9 +13,7 @@ export const {
   signOut,
 } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  theme: {
-    logo: "/icon-title.png",
-  },
+  theme: {},
   providers: [
     Google({
       clientId: env.GOOGLE_CLIENT_ID,

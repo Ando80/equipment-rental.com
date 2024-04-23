@@ -7,12 +7,12 @@ import { prisma } from "@/prisma";
 export const createLocationAction = userAction(
   LocationSchema,
   async (input, context) => {
-    // const location = await prisma.location.create({
-    //  data: {
-    //   ...input,
-    //   userId: context.user.id,
-    // },
-    //});
+    const location = await prisma.location.create({
+      data: {
+        ...input,
+        userId: context.user.id,
+      },
+    });
 
     return location;
   }

@@ -56,3 +56,15 @@ export const updateTypeAction = userAction(
     return updatedType;
   }
 );
+
+export const deleteTypeAction = userAction(
+  z.string(),
+  async (typeId, context) => {
+    await prisma.type.delete({
+      where: {
+        id: typeId,
+        userId: context.user.id,
+      },
+    });
+  }
+);

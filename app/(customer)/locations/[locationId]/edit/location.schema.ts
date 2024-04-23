@@ -11,7 +11,7 @@ export const LocationSchema = z.object({
   dateFin: z.date().optional().nullable(),
   typeId: z.date().optional().nullable(),
   enginId: z.date().optional().nullable(),
-  payement: z.string().nullable(),
+  payement: z.string().optional().nullable(),
 });
 
 export type LocationType = z.infer<typeof LocationSchema>;

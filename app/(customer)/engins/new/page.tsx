@@ -1,6 +1,6 @@
 import { Layout, LayoutTitle } from "@/components/layout";
 import { PageParams } from "@/types/next";
-import { EnginForm } from "../[enginId]/edit/enginForm";
+import { EnginForm } from "../[slug]/edit/enginForm";
 
 export default async function RoutePage(props: PageParams<{}>) {
   return (

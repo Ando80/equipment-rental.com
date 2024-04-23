@@ -28,6 +28,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createLocationAction } from "./location.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export type LocationFormProps = {
   defaultValues?: LocationType;
@@ -115,6 +116,85 @@ export const LocationForm = (props: LocationFormProps) => {
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="nbrEngin"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nombre engins</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Nombre d'engins" />
+                </FormControl>
+                <FormDescription>Nombre d'engins</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Champ de sélection de type d'engin (créé dynamiquement en fonction du nombre d'engins) */}
+          {Array.from({
+            length: parseInt(form.getValues("nbrEngin") ?? 0),
+          }).map((_, index) => (
+            <FormField
+              key={index}
+              control={form.control}
+              name={`typeId${index}`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Slectionner une categorie d'engin</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value ?? ""}
+                      onValueChange={field.onChange}
+                    >
+                      <SelectTrigger>
+                        <SelectValue></SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TYPES_ENGIN.map((type) => (
+                          <SelectItem value={type} key={type}>
+                            {type}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormDescription>Type d'engin {index + 1}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+
+          {/* Champs de checkbox pour la sélection d'engin */}
+          {Array.from({
+            length: parseInt(form.getValues("nbrEngin") ?? 0),
+          }).map((_, index) => (
+            <FormField
+              key={index}
+              control={form.control}
+              name={`enginSelectionne${index}`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value ?? false}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    >
+                      Engin {index + 1} sélectionné
+                    </Checkbox>
+                  </FormControl>
+                  <FormDescription>
+                    Sélectionner un engin pour le type{" "}
+                    {form.getValues(`typeEngin${index}`)}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+
           <Button className=" bg-pink-300 text-yellow-950 hover:bg-pink-200 ">
             {isCreate ? "Create location" : "Save location"}
           </Button>

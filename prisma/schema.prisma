@@ -71,7 +71,7 @@ model Type {
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String  
-  locations  Location[]
+ 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -80,7 +80,6 @@ model Type {
 // Définition de la table Engin
 model Engin {
   id            String    @id @default(cuid())
-  slug          String  @unique
   image         String?
   registration String   
   frais         Float?
@@ -89,7 +88,7 @@ model Engin {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  locations     Location[]
+ 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -113,8 +112,6 @@ model Location {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  type            Type      @relation(fields: [typeId], references: [id], onDelete: Cascade)
-  engin           Engin     @relation(fields: [enginId], references: [id] , onDelete: Cascade)
 
 
   createdAt DateTime @default(now())

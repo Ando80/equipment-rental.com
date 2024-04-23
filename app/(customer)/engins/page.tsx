@@ -37,7 +37,6 @@ export default async function RoutePage(props: PageParams<{}>) {
                   <Link href={`/types/${engin.id}`} key={engin.id}>
                     <TableCell>{engin.registration}</TableCell>
                   </Link>
-                  <TableCell className="font-mono">{engin.slug}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

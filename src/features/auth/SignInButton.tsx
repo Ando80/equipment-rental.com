@@ -7,13 +7,14 @@ import { signInAction } from "./auth.action";
 export const SignInButton = () => {
   return (
     <Button
+      className="rounded border border-green-500 bg-transparent px-8 py-4 font-semibold text-green-700 hover:border-transparent hover:bg-green-500 hover:text-white"
       variant="secondary"
-      size="sm"
+      size="lg"
       onClick={() => {
         signInAction();
       }}
     >
-      <LogIn size={16} className="mr-2" />
+      <LogIn size={20} className="mr-2" />
       Sign In
     </Button>
   );

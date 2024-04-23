@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LoggedInDropdown } from "./LoggedInDropdown";
 import { currentUser } from "@/auth/current-user";
+
 export const LoggedInButton = async () => {
   const user = await currentUser();
 
