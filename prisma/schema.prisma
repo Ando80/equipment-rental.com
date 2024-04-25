@@ -55,7 +55,7 @@ model User {
   sessions      Session[]
   locations     Location[]
   types         Type[]
-  engins        Engin[]
+ engins         Engin[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -72,6 +72,7 @@ model Type {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String  
  
+  engin     Engin[] 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -85,10 +86,11 @@ model Engin {
   frais         Float?
   state         String?
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
-
+  typeId  String
+  type   Type  @relation(fields: [typeId], references: [id], onDelete: Cascade)
  
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

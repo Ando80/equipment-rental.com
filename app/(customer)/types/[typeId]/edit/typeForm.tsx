@@ -46,7 +46,7 @@ export const TypeForm = (props: TypeFormProps) => {
       }
       toast.success("Type creer");
 
-      router.push(`/types/${data.id}`);
+      router.push(`/types`);
     },
   });
 

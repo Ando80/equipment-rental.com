@@ -40,9 +40,9 @@ export default async function RoutePage(
           {types.length ? (
             <Table>
               <TableBody className="flex flex-col flex-wrap items-center justify-around gap-4 rounded-[2rem] bg-white px-4 py-16 shadow-xl sm:flex-row">
-                {types.map((slug) => (
-                  <TableRow key={slug.id}>
-                    <Link href={`/engins/new`} key={slug.id}>
+                {types.map((type) => (
+                  <TableRow key={type.id}>
+                    <Link href={`/engins/${type.slug}`} key={type.id}>
                       <TableCell className="flex flex-col items-center gap-5">
                         <Image
                           src="/FolderIcon.png"
@@ -52,10 +52,10 @@ export default async function RoutePage(
                         />
                         <h3 className="text-center text-sm font-normal leading-8 text-black md:text-base">
                           Categories:{" "}
-                          <span className="font-bold">{slug.name}</span>
+                          <span className="font-bold">{type.name}</span>
                         </h3>
                         <div className=" sm:flex-row">
-                          <Link href={`/types/${slug.id}/edit`}>
+                          <Link href={`/types/${type.id}/edit`}>
                             <Image
                               src="/edit.png"
                               alt="edit Icon"
@@ -63,7 +63,7 @@ export default async function RoutePage(
                               height={35}
                             />
                           </Link>
-                          <DeleteButton typeId={slug.id} />
+                          <DeleteButton typeId={type.id} />
                         </div>
                       </TableCell>
                     </Link>

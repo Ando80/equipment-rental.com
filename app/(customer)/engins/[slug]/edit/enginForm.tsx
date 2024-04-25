@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 export type EnginFormProps = {
   defaultValues?: EnginType;
   enginId?: string;
+  typeId?: string;
 };
 
 export const EnginForm = (props: EnginFormProps) => {
@@ -33,13 +34,27 @@ export const EnginForm = (props: EnginFormProps) => {
 
   const mutation = useMutation({
     mutationFn: async (values: EnginType) => {
+      const typeId = props.typeId || "";
+      const registration = values.registration || "";
+      const image = values.image || null;
+      const frais = values.frais || null;
+      const state = values.state || null;
       const { data, serverError } = isCreate
-        ? await createEnginAction(values)
+        ? await createEnginAction({
+            typeId: typeId,
+            registration: registration,
+          })
         : await updateEnginAction({
-            id: props.enginId ?? "-",
-            data: values,
+            id: props.enginId || "",
+            typeId: typeId,
+            data: {
+              registration: values.registration,
+              image: image,
+              frais: frais,
+              state: state,
+              typeId: typeId,
+            },
           });
-
       if (serverError || !data) {
         toast.error(serverError);
         return;
@@ -77,32 +92,6 @@ export const EnginForm = (props: EnginFormProps) => {
                   <Input placeholder="registration" {...field} />
                 </FormControl>
                 <FormDescription>Registration de l'engin</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="slug"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Slug</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="A005"
-                    {...field}
-                    onChange={(e) => {
-                      const value = e.target.value
-                        .replaceAll(" ", "-")
-                        .toLowerCase();
-
-                      field.onChange(value);
-                    }}
-                  />
-                </FormControl>
-                <FormDescription>
-                  The slug is used in the URL of the review page.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
